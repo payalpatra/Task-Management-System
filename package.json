@@ -2,7 +2,7 @@
   "name": "task-management-system",
   "version": "1.0.0",
   "description": "This project was",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
     "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
