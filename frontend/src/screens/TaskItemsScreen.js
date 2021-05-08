@@ -79,7 +79,7 @@ function TaskItemsScreen({ cart }) {
     } = order;
 
     // Fetch Api to post data
-    const response = await fetch("/task", {
+    const response = await fetch("task", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

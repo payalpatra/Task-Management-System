@@ -1,8 +1,9 @@
 require("dotenv").config();
+const path = require("path")
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const Employee = require("./models/Employee")
+const Employee = require("./Backend/models/Employee")
 
 const app = express();
 app.use(express.json());
@@ -17,10 +18,10 @@ app.use(express.json());
 );
 
 
-app.get("/", (req, res) => {
-  res.send("Hey There , Greetings From The Server. Have a Good Day :)")
+// app.get("/", (req, res) => {
+//   res.send("Hey There , Greetings From The Server. Have a Good Day :)")
     
-})
+// })
 app.get("/employee", (req, res) => {
     
   Employee.find({  })
@@ -58,6 +59,17 @@ app.get("/task", (req, res) => {
     
   });
   
+
+  if(process.env.NODE_ENV === 'production'){
+    app.use(express.static(path.join(__dirname, '/frontend/build')));
+    app.get("*", (req, res)=>{
+     res.sendFile(path.join(__dirname, 'frontend',"build","index.html"));
+    })
+  }else{
+    app.get("/", (req,res)=>{
+      res.send("Hey There , Greetings From The Server. Have a Good Day :)")
+    })
+  }
 
 
 const port = process.env.PORT || 5000;
